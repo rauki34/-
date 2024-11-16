@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.CS42RecordMapper">
+    <!--设置查询之后返回的结果集 column 表示数据库的字段名 property 实体类属性名-->
+    <resultMap type="CS42Record" id="CS42RecordResult">
+        <id property="id" column="id"/>
+        <result property="jcdw" column="jcdw"/>
+        <result property="jlbh" column="jlbh"/>
+        <result property="gcmc" column="gcmc"/>
+        <result property="htd" column="htd"/>
+        <result property="sgdw" column="sgdw"/>
+        <result property="jldw" column="jldw"/>
+        <result property="gcbw" column="gcbw"/>
+        <result property="ypxx" column="ypxx"/>
+        <result property="jcrq" column="jcrq"/>
+        <result property="cstj" column="cstj"/>
+        <result property="jcyj" column="jcyj"/>
+        <result property="pdyj" column="pdyj"/>
+        <result property="zyyqsbmc" column="zyyqsbmc"/>
+
+        <!-- 表3数据 试拌调整压浆材料拌合物性能 -->
+        <result property="sjb3" column="sjb3" javaType="float" jdbcType="REAL"/>
+        <result property="lddcs" column="lddcs" javaType="float" jdbcType="REAL"/>
+        <result property="ldd30" column="ldd30" javaType="float" jdbcType="REAL"/>
+        <result property="ldd60" column="ldd60" javaType="float" jdbcType="REAL"/>
+        <result property="msl3" column="msl3" javaType="float" jdbcType="REAL"/>
+        <result property="msl24" column="msl24" javaType="float" jdbcType="REAL"/>
+        <result property="zypzl3" column="zypzl3" javaType="float" jdbcType="REAL"/>
+        <result property="zypzl24" column="zypzl24" javaType="float" jdbcType="REAL"/>
+        <result property="ylmsl22" column="ylmsl22" javaType="float" jdbcType="REAL"/>
+        <result property="ylmsl36" column="ylmsl36" javaType="float" jdbcType="REAL"/>
+        <result property="cyd" column="cyd"/>
+        <result property="njsjcn" column="njsjcn" javaType="float" jdbcType="REAL"/>
+        <result property="njsjzn" column="njsjzn" javaType="float" jdbcType="REAL"/>
+        <result property="bz" column="bz"/>
+
+        <!-- 表4数据 检验强度 -->
+        <result property="sjb4" column="sjb4" javaType="float" jdbcType="REAL"/>
+        <result property="sjsl" column="sjsl" javaType="int" jdbcType="INTEGER"/>
+        <result property="yhfs" column="yhfs"/>
+        <result property="cxrq" column="cxrq" javaType="java.util.Date" jdbcType="DATE"/>
+        <result property="yjrq7" column="yjrq7" javaType="java.util.Date" jdbcType="DATE"/>
+        <result property="yjrq28" column="yjrq28" javaType="java.util.Date" jdbcType="DATE"/>
+        <result property="kzqd7" column="kzqd7" javaType="float" jdbcType="REAL"/>
+        <result property="kzqd28" column="kzqd28" javaType="float" jdbcType="REAL"/>
+        <result property="kyqd7" column="kyqd7" javaType="float" jdbcType="REAL"/>
+        <result property="kyqd28" column="kyqd28" javaType="float" jdbcType="REAL"/>
+
+        <!-- 表5数据 确定配合比：每m3压浆材料各种材料用量(kg) -->
+        <result property="sjb5" column="sjb5"/>
+        <result property="sn" column="sn"/>
+        <result property="s" column="s"/>
+        <result property="wjj" column="wjj"/>
+        <result property="wclname" column="wclname"/>
+        <result property="wcl" column="wcl"/>
+
+        <!-- 表6数据 压浆材料配合比校正 -->
+        <result property="llmd" column="llmd"/>
+        <result property="scmd" column="scmd"/>
+        <result property="jzxs" column="jzxs"/>
+        <result property="fjsm" column="fjsm"/>
+    </resultMap>
+
+    <!-- 查询列表 -->
+    <select id="selectCS42RecordList" parameterType="CS42Record" resultMap="CS42RecordResult">
+        select * from CS42
+        where 1 = 1
+        <if test="jcdw != null and jcdw != ''">
+            AND jcdw = #{jcdw}
+        </if>
+        <if test="jlbh != null and jlbh != ''">
+            AND jlbh = #{jlbh}
+        </if>
+        <if test="gcmc != null and gcmc != ''">
+            AND gcmc like concat('%', #{gcmc}, '%')
+        </if>
+        <if test="htd != null and htd != ''">
+            AND htd like concat('%', #{htd}, '%')
+        </if>
+        <if test="sgdw != null and sgdw != ''">
+            AND sgdw like concat('%', #{sgdw}, '%')
+        </if>
+        <if test="jldw != null and jldw != ''">
+            AND jldw like concat('%', #{jldw}, '%')
+        </if>
+        <if test="gcbw != null and gcbw != ''">
+            AND gcbw like concat('%', #{gcbw}, '%')
+        </if>
+        <if test="ypxx != null and ypxx != ''">
+            AND ypxx like concat('%', #{ypxx}, '%')
+        </if>
+        <if test="jcrq != null">
+            AND jcrq = #{jcrq}
+        </if>
+        <if test="cstj != null and cstj != ''">
+            AND cstj like concat('%', #{cstj}, '%')
+        </if>
+        <if test="jcyj != null and jcyj != ''">
+            AND jcyj like concat('%', #{jcyj}, '%')
+        </if>
+        <if test="pdyj != null and pdyj != ''">
+            AND pdyj like concat('%', #{pdyj}, '%')
+        </if>
+        <if test="zyyqsbmc != null and zyyqsbmc != ''">
+            AND zyyqsbmc like concat('%', #{zyyqsbmc}, '%')
+        </if>
+
+
+        <!-- 数据范围过滤 -->
+        ${params.dataScope}
+    </select>
+
+    <!-- 查询单条记录 -->
+    <select id="selectCS42RecordById" parameterType="Long"
+            resultMap="CS42RecordResult">
+        select *
+        from CS42
+        where id = #{id}
+    </select>
+
+    <insert id="insertCS42Record" parameterType="CS42Record" useGeneratedKeys="true" keyProperty="id">
+        insert into CS42 (
+        <if test="jcdw != null and jcdw != ''">jcdw,</if>
+        <if test="jlbh != null and jlbh != ''">jlbh,</if>
+        <if test="gcmc != null and gcmc != ''">gcmc,</if>
+        <if test="htd != null and htd != ''">htd,</if>
+        <if test="sgdw != null and sgdw != ''">sgdw,</if>
+        <if test="jldw != null and jldw != ''">jldw,</if>
+        <if test="gcbw != null and gcbw != ''">gcbw,</if>
+        <if test="ypxx != null and ypxx != ''">ypxx,</if>
+        <if test="cstj != null and cstj != ''">cstj,</if>
+        <if test="jcyj != null and jcyj != ''">jcyj,</if>
+        <if test="pdyj != null and pdyj != ''">pdyj,</if>
+        <if test="zyyqsbmc != null and zyyqsbmc != ''">zyyqsbmc,</if>
+        <if test="jcrq != null">jcrq,</if>
+        <if test="sjb3 != null">sjb3,</if>
+        <if test="lddcs != null">lddcs,</if>
+        <if test="ldd30 != null">ldd30,</if>
+        <if test="ldd60 != null">ldd60,</if>
+        <if test="msl3 != null">msl3,</if>
+        <if test="msl24 != null">msl24,</if>
+        <if test="zypzl3 != null">zypzl3,</if>
+        <if test="zypzl24 != null">zypzl24,</if>
+        <if test="ylmsl22 != null">ylmsl22,</if>
+        <if test="ylmsl36 != null">ylmsl36,</if>
+        <if test="cyd != null and cyd != ''">cyd,</if>
+        <if test="njsjcn != null">njsjcn,</if>
+        <if test="njsjzn != null">njsjzn,</if>
+        <if test="bz != null and bz != ''">bz,</if>
+        <if test="sjb4 != null">sjb4,</if>
+        <if test="sjsl != null">sjsl,</if>
+        <if test="yhfs != null and yhfs != ''">yhfs,</if>
+        <if test="cxrq != null">cxrq,</if>
+        <if test="yjrq7 != null">yjrq7,</if>
+        <if test="yjrq28 != null">yjrq28,</if>
+        <if test="kzqd7 != null">kzqd7,</if>
+        <if test="kzqd28 != null">kzqd28,</if>
+        <if test="kyqd7 != null">kyqd7,</if>
+        <if test="kyqd28 != null">kyqd28,</if>
+        <if test="sjb5 != null and sjb5 != ''">sjb5,</if>
+        <if test="sn != null and sn != ''">sn,</if>
+        <if test="s != null and s != ''">s,</if>
+        <if test="wjj != null and wjj != ''">wjj,</if>
+        <if test="wclname != null and wclname != ''">wclname,</if>
+        <if test="wcl != null and wcl != ''">wcl,</if>
+        <if test="llmd != null and llmd != ''">llmd,</if>
+        <if test="scmd != null and scmd != ''">scmd,</if>
+        <if test="jzxs != null and jzxs != ''">jzxs,</if>
+        <if test="fjsm != null and fjsm != ''">fjsm,</if>
+        id
+        ) values (
+        <if test="jcdw != null and jcdw != ''">#{jcdw},</if>
+        <if test="jlbh != null and jlbh != ''">#{jlbh},</if>
+        <if test="gcmc != null and gcmc != ''">#{gcmc},</if>
+        <if test="htd != null and htd != ''">#{htd},</if>
+        <if test="sgdw != null and sgdw != ''">#{sgdw},</if>
+        <if test="jldw != null and jldw != ''">#{jldw},</if>
+        <if test="gcbw != null and gcbw != ''">#{gcbw},</if>
+        <if test="ypxx != null and ypxx != ''">#{ypxx},</if>
+        <if test="cstj != null and cstj != ''">#{cstj},</if>
+        <if test="jcyj != null and jcyj != ''">#{jcyj},</if>
+        <if test="pdyj != null and pdyj != ''">#{pdyj},</if>
+        <if test="zyyqsbmc != null and zyyqsbmc != ''">#{zyyqsbmc},</if>
+        <if test="jcrq != null">#{jcrq},</if>
+        <if test="sjb3 != null">#{sjb3},</if>
+        <if test="lddcs != null">#{lddcs},</if>
+        <if test="ldd30 != null">#{ldd30},</if>
+        <if test="ldd60 != null">#{ldd60},</if>
+        <if test="msl3 != null">#{msl3},</if>
+        <if test="msl24 != null">#{msl24},</if>
+        <if test="zypzl3 != null">#{zypzl3},</if>
+        <if test="zypzl24 != null">#{zypzl24},</if>
+        <if test="ylmsl22 != null">#{ylmsl22},</if>
+        <if test="ylmsl36 != null">#{ylmsl36},</if>
+        <if test="cyd != null and cyd != ''">#{cyd},</if>
+        <if test="njsjcn != null">#{njsjcn},</if>
+        <if test="njsjzn != null">#{njsjzn},</if>
+        <if test="bz != null and bz != ''">#{bz},</if>
+        <if test="sjb4 != null">#{sjb4},</if>
+        <if test="sjsl != null">#{sjsl},</if>
+        <if test="yhfs != null and yhfs != ''">#{yhfs},</if>
+        <if test="cxrq != null">#{cxrq},</if>
+        <if test="yjrq7 != null">#{yjrq7},</if>
+        <if test="yjrq28 != null">#{yjrq28},</if>
+        <if test="kzqd7 != null">#{kzqd7},</if>
+        <if test="kzqd28 != null">#{kzqd28},</if>
+        <if test="kyqd7 != null">#{kyqd7},</if>
+        <if test="kyqd28 != null">#{kyqd28},</if>
+        <if test="sjb5 != null and sjb5 != ''">#{sjb5},</if>
+        <if test="sn != null and sn != ''">#{sn},</if>
+        <if test="s != null and s != ''">#{s},</if>
+        <if test="wjj != null and wjj != ''">#{wjj},</if>
+        <if test="wclname != null and wclname != ''">#{wclname},</if>
+        <if test="wcl != null and wcl != ''">#{wcl},</if>
+        <if test="llmd != null and llmd != ''">#{llmd},</if>
+        <if test="scmd != null and scmd != ''">#{scmd},</if>
+        <if test="jzxs != null and jzxs != ''">#{jzxs},</if>
+        <if test="fjsm != null and fjsm != ''">#{fjsm},</if>
+        null
+        )
+    </insert>
+
+    <update id="updateCS42Record" parameterType="CS42Record">
+        update CS42
+        <set>
+            <if test="jcdw != null and jcdw != ''">
+                jcdw = #{jcdw},
+            </if>
+            <if test="jlbh != null and jlbh != ''">
+                jlbh = #{jlbh},
+            </if>
+            <if test="gcmc != null and gcmc != ''">
+                gcmc = #{gcmc},
+            </if>
+            <if test="htd != null and htd != ''">
+                htd = #{htd},
+            </if>
+            <if test="sgdw != null and sgdw != ''">
+                sgdw = #{sgdw},
+            </if>
+            <if test="jldw != null and jldw != ''">
+                jldw = #{jldw},
+            </if>
+            <if test="gcbw != null and gcbw != ''">
+                gcbw = #{gcbw},
+            </if>
+            <if test="ypxx != null and ypxx != ''">
+                ypxx = #{ypxx},
+            </if>
+            <if test="jcrq != null">
+                jcrq = #{jcrq},
+            </if>
+            <if test="cstj != null and cstj != ''">
+                cstj = #{cstj},
+            </if>
+            <if test="jcyj != null and jcyj != ''">
+                jcyj = #{jcyj},
+            </if>
+            <if test="pdyj != null and pdyj != ''">
+                pdyj = #{pdyj},
+            </if>
+            <if test="zyyqsbmc != null and zyyqsbmc != ''">
+                zyyqsbmc = #{zyyqsbmc},
+            </if>
+            <if test="sjb3 != null">
+                sjb3 = #{sjb3},
+            </if>
+            <if test="lddcs != null">
+                lddcs = #{lddcs},
+            </if>
+            <if test="ldd30 != null">
+                ldd30 = #{ldd30},
+            </if>
+            <if test="ldd60 != null">
+                ldd60 = #{ldd60},
+            </if>
+            <if test="msl3 != null">
+                msl3 = #{msl3},
+            </if>
+            <if test="msl24 != null">
+                msl24 = #{msl24},
+            </if>
+            <if test="zypzl3 != null">
+                zypzl3 = #{zypzl3},
+            </if>
+            <if test="zypzl24 != null">
+                zypzl24 = #{zypzl24},
+            </if>
+            <if test="ylmsl22 != null">
+                ylmsl22 = #{ylmsl22},
+            </if>
+            <if test="ylmsl36 != null">
+                ylmsl36 = #{ylmsl36},
+            </if>
+            <if test="cyd != null and cyd != ''">
+                cyd = #{cyd},
+            </if>
+            <if test="njsjcn != null">
+                njsjcn = #{njsjcn},
+            </if>
+            <if test="njsjzn != null">
+                njsjzn = #{njsjzn},
+            </if>
+            <if test="bz != null and bz != ''">
+                bz = #{bz},
+            </if>
+            <if test="sjb4 != null">
+                sjb4 = #{sjb4},
+            </if>
+            <if test="sjsl != null">
+                sjsl = #{sjsl},
+            </if>
+            <if test="yhfs != null and yhfs != ''">
+                yhfs = #{yhfs},
+            </if>
+            <if test="cxrq != null">
+                cxrq = #{cxrq},
+            </if>
+            <if test="yjrq7 != null">
+                yjrq7 = #{yjrq7},
+            </if>
+            <if test="yjrq28 != null">
+                yjrq28 = #{yjrq28},
+            </if>
+            <if test="kzqd7 != null">
+                kzqd7 = #{kzqd7},
+            </if>
+            <if test="kzqd28 != null">
+                kzqd28 = #{kzqd28},
+            </if>
+            <if test="kyqd7 != null">
+                kyqd7 = #{kyqd7},
+            </if>
+            <if test="kyqd28 != null">
+                kyqd28 = #{kyqd28},
+            </if>
+            <if test="sjb5 != null and sjb5 != ''">
+                sjb5 = #{sjb5},
+            </if>
+            <if test="sn != null and sn != ''">
+                sn = #{sn},
+            </if>
+            <if test="s != null and s != ''">
+                s = #{s},
+            </if>
+            <if test="wjj != null and wjj != ''">
+                wjj = #{wjj},
+            </if>
+            <if test="wclname != null and wclname != ''">
+                wclname = #{wclname},
+            </if>
+            <if test="wcl != null and wcl != ''">
+                wcl = #{wcl},
+            </if>
+            <if test="llmd != null and llmd != ''">
+                llmd = #{llmd},
+            </if>
+            <if test="scmd != null and scmd != ''">
+                scmd = #{scmd},
+            </if>
+            <if test="jzxs != null and jzxs != ''">
+                jzxs = #{jzxs},
+            </if>
+            <if test="fjsm != null and fjsm != ''">
+                fjsm = #{fjsm},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCS42RecordById" parameterType="Long">
+        delete
+        from CS42
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteCS42RecordByIds" parameterType="Long">
+        delete from CS42 where id in
+        <foreach collection="array" item="id"
+                 open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper> 
